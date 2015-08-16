@@ -2,17 +2,18 @@
 #define WORD_READER_H
 
 #include <fstream>
-#include "static_list_template.h"
-#include "static_list_template.impl.h"
+#include <string>
+#include "dynamic_list_template.h"
+#include "dynamic_list_template.impl.h"
 
 namespace de{
+    
+    typedef struct WordReader{
+        std::fstream input;
+    }WordReader;
 
-typedef struct WordReader{
-    std::ifstream input;
-}WordReader;
-
- WordReader createReader(const std::string& inputFile);
- List<std::string> getWords(const WordReader& reader);
-     
+    WordReader createReader(const std::string& inputFile);
+    List<List<char> > getWords(WordReader& reader);
+    
 }
 #endif//WORD_READER

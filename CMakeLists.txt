@@ -3,19 +3,23 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.9)
 
 project(hangingDeath CXX)
 
-include_directories(${CMAKE_CURRENT_SOUCE_DIR}/include)
+if(CMAKE_COMPILER_IS_GNUCXX OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -fvisibility=hidden")
+endif()
 
 file(GLOB_RECURSE sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc)
 file(GLOB_RECURSE includes ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
 
-add_library(${PROJECT_NAME} ${sources} ${includes})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_library(${PROJECT_NAME} STATIC ${sources} ${includes})
 # target_link_libraries(${PROJECT_NAME}
+
 file(GLOB_RECURSE apps ${CMAKE_CURRENT_SOURCE_DIR}/app/*.cc)
 
 foreach(mainFile ${apps})
     string(REPLACE ".cc" "" main1 ${mainFile})
-    string(REPLACE "app_" "" main ${main1})
-    get_filename_component(name ${main} NAME)
-    add_executable(${name} ${mainFile})
-    target_link_libraries(${name} code)
-endforeach( mainFile ${mains})
+    get_filename_component(main ${main1} NAME)
+    add_executable(${main} ${mainFile})
+    target_link_libraries(${main} ${PROJECT_NAME})
+endforeach( mainFile ${apps})
