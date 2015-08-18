@@ -6,7 +6,7 @@ namespace de{
     Game createGame(const List<List<char> > words){
         Game game;
         game.gc = createGameController(words);
-        //game.screen = createScreen();
+        game.sc = createScreen(&game.gc);
         return game;
     }
     
@@ -27,7 +27,7 @@ namespace de{
                 std::cin.get();
                 de::guessChar(game.gc, guess);
                 
-                std::cout << "Current Life: " << de::getCurrentLife(game.gc) << std::endl;
+                
                 std::cout << game.gc.wordChecker << std::endl; /* This should not appear here */
                 
                 if(de::isLettersGuessedRight(game.gc)){

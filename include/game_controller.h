@@ -17,6 +17,8 @@ namespace de{
     }GameController;
     
     GameController createGameController(const List<List<char> >& words);
+
+    List<bool> getCheckedChars(const GameController& gc);
     
     void newWord(GameController& gc);
     

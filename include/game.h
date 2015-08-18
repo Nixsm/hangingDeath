@@ -2,11 +2,12 @@
 #define GAME_H
 
 #include "game_controller.h"
+#include "screen.h"
 
 namespace de{
     typedef struct Game{
         GameController gc;
-        //Screen sc;
+        Screen sc;
     }Game;
     
     Game createGame(const List<List<char> > words);

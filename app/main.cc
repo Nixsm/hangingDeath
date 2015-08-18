@@ -1,10 +1,25 @@
 #include <iostream>
-
+#include "screen.h"
 #include "word_reader.h"
 #include "game_controller.h"
+#include <tutils/tutils.h>
 
 int main(int argc, char** argv){
-    de::WordReader readedWords = de::createReader("/home/nicholas/words.txt");
+    
+    system("clear");
+
+    drawBorders('|', '|');
+    //    gotoxy(0, 0);
+//    std::cout << "Teste";
+//    
+//    gotoxy(70, 20);
+//    std::cout << "Teste2";
+//    
+    
+    
+    
+//    return 0;
+    de::WordReader readedWords = de::createReader("/Users/nicholas/workspace/hangingDeath/build/words");
     
     de::List<de::List<char> > words = de::getWords(readedWords);
         
@@ -22,6 +37,11 @@ int main(int argc, char** argv){
     
     std::cout << de::getCurrentWord(gc) << std::endl;
     
+    de::Screen sc = de::createScreen(&gc);
+
+    de::drawHanger(sc);
+
+    de::drawGuessedChars(sc);
 
     while(true){
         std::cout << "Guess a char" << std::endl;
@@ -32,14 +52,9 @@ int main(int argc, char** argv){
         
         std::cout << de::getCurrentLife(gc) << std::endl;
 
-        std::cout << gc.wordChecker << std::endl;
-        
-        if (de::isLettersGuessedRight(gc)){
-            break;
-        }
-        
+        de::drawCurrentWord(sc);
+        de::drawGuessedChars(sc);
     }
-    
     return 0;
     
         

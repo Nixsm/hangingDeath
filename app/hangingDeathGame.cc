@@ -4,6 +4,8 @@
 void help();
 
 int main(int argc, char** argv){
+    
+    return 0;
     if (argc != 2){
         help(); /* not enough args, call for help */
         std::exit(0);

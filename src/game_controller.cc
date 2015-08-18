@@ -30,6 +30,10 @@ namespace de{
             gc.wordChecker.insert(false, i);
         }
     }
+
+    List<bool> getCheckedChars(const GameController& gc){
+        return gc.wordChecker;
+    }
     
     
     void guessChar(GameController& gc, const char& guess){
