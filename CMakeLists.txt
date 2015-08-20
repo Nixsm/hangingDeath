@@ -17,7 +17,7 @@ include_directories(${TUTILS_INCLUDE_DIRS})
 
 
 add_library(${PROJECT_NAME} STATIC ${sources} ${includes})
-#target_link_libraries(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} ${TUTILS_LIBRARIES})
 
 file(GLOB_RECURSE apps ${CMAKE_CURRENT_SOURCE_DIR}/app/*.cc)
 
@@ -27,5 +27,5 @@ foreach(mainFile ${apps})
     string(REPLACE ".cc" "" main1 ${mainFile})
     get_filename_component(main ${main1} NAME)
     add_executable(${main} ${mainFile})
-target_link_libraries(${main} ${PROJECT_NAME} ${TUTILS_LIBRARIES})
+target_link_libraries(${main} ${PROJECT_NAME})
 endforeach( mainFile ${apps})

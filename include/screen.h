@@ -7,10 +7,16 @@
 namespace de{
 
     typedef struct {
-        GameController const* gc;
+        GameController* gc;
     }Screen;
 
-    Screen createScreen(GameController const* gc);
+    Screen createScreen(GameController* gc);
+    
+    void clearAlertMessage();
+    
+    void alertMessage(const char* message, const bool& sleep);
+    
+    void drawInput(Screen& sc);
     
     void drawHanger(const Screen& sc);
 

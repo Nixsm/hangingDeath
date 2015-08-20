@@ -16,13 +16,15 @@ namespace de{
         Hanger hanger;
     }GameController;
     
+    void reset(GameController& gc);
+    
     GameController createGameController(const List<List<char> >& words);
 
     List<bool> getCheckedChars(const GameController& gc);
     
     void newWord(GameController& gc);
     
-    void guessChar(GameController& gc, const char& guess);
+    bool guessChar(GameController& gc, const char& guess);
     
     List<char> getCharsGuessed(const GameController& gc);
     List<char> getCurrentWord(const GameController& gc);

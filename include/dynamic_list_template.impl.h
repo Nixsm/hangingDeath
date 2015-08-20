@@ -81,6 +81,7 @@ namespace de {
         
         Node<T>* newNode = new Node<T>;
         newNode->value = element;
+        newNode->next = nullptr;
         
         /* Check if we are not dealing with the first element */
         if (previous) {
@@ -124,7 +125,9 @@ namespace de {
     }
     
     
-    template<class T> List<T> List<T>::operator=(const List<T>& other){
+    template<class T> List<T>& List<T>::operator=(const List<T>& other){
+        this->~List();
+        
         Node<T>* begin = other._begin;
         unsigned int cont = 1;
         while (Node<T>* node = begin) {
@@ -188,7 +191,7 @@ namespace de {
             cont++;
             begin = node->next;
         }
-        
+                
         insert(value, cont);
     }
     

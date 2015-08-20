@@ -13,7 +13,14 @@ namespace de{
         return gc;
     }
     
+    void reset(GameController& gc){
+        gc.hanger = createHanger(10);
+        gc.wordChecker = List<bool>();
+        gc.currentWord = List<char>();
+    }
+    
     void newWord(GameController& gc){
+        
         /* Create a seed based on time since 1970 */
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
         /* Create the default random engine using the seed we created */
@@ -21,9 +28,9 @@ namespace de{
         /* Generate a number with that engine */
         std::uniform_int_distribution<int> distribution(1, (int)gc.words.size());
         /* Roll the dice!! */
-        int diceRoll = distribution(generator);  // generates number in the range 1..Size of game words 
+        int diceRoll = distribution(generator);  // generates number in the range 1..Size of game words
 
-        gc.currentWord = gc.words.at(diceRoll);    
+        gc.currentWord = gc.words.at(diceRoll);
         
         /* Tell the program we dont have any word guessed yet */
         for (auto i = 1u; i <= gc.currentWord.size(); ++i){
@@ -36,7 +43,7 @@ namespace de{
     }
     
     
-    void guessChar(GameController& gc, const char& guess){
+    bool guessChar(GameController& gc, const char& guess){
         gc.charsGuessed.insertOrdered(guess);
         
         /* Check if the element is in our current word */
@@ -49,8 +56,13 @@ namespace de{
             for (auto i = 1u; i <= occurences.size(); ++i){
                 gc.wordChecker[occurences.at(i)] = true;
             }
+            
+            return true;
+            
         }else{
             decreaseHangedLife(gc.hanger);
+            
+            return false;
         }
                 
     }

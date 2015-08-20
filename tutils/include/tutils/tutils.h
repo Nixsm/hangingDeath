@@ -7,8 +7,10 @@
 #ifdef _cplusplus
 extern "C" {
 #endif
-    void gotoxy(const int& x, const int& y);
-    void drawBorders(const char& charX, const char& charY);
+    void gotoxy(int x, int y);
+    void drawBorders(char charX, char charY);
+    void printAt(const char* message, int x, int y);
+    void clearLine(int y);
 #ifdef _cplusplus
 }
 #endif

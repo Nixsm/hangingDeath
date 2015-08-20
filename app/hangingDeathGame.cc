@@ -5,7 +5,12 @@ void help();
 
 int main(int argc, char** argv){
     
-    return 0;
+#ifdef __WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+    
     if (argc != 2){
         help(); /* not enough args, call for help */
         std::exit(0);

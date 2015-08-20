@@ -12,7 +12,33 @@ namespace de {
     
     template<class T> class List {
     public:
+        List() {
+            _begin = nullptr;
+            _size = 0;
+        }
+        
+        List(const List<T>& list)
+        :_size(0), _begin(nullptr)
+        {
+            Node<T>* begin = list._begin;
+            
+            unsigned int cont = 1;
+            while (Node<T>* node = begin) {
+                insert(node->value, cont++);
+                
+                begin = node->next;
+            }
+        }
         ~List() {
+            Node<T>* node;
+            while (_begin != nullptr) {
+                node = _begin;
+                _begin = _begin->next;
+
+                delete node;
+            }
+            
+            _size = 0;
             
         };
 
@@ -36,14 +62,14 @@ namespace de {
             Node<T>* begin = list._begin;
             
             while (Node<T>* node = begin) {
-                std::cout << node->value << " ";
+                os << node->value << " ";
                 begin = node->next;
             }
             
             return os;
         }
         
-        List<T> operator=(const List<T>& other);
+        List<T>& operator=(const List<T>& other);
         
         void reverse();
         

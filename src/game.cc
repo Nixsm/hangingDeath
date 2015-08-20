@@ -1,6 +1,7 @@
 #include "game.h"
 #include <ctype.h>
 #include <limits>
+#include <tutils/tutils.h>
 
 namespace de{
     Game createGame(const List<List<char> > words){
@@ -13,22 +14,24 @@ namespace de{
     void start(Game& game){
         bool shouldQuit = false;
         
+        drawBorders('_', '.');
         
         
         while (!shouldQuit){
-        
+            
             /* choose a random new word */
             de::newWord(game.gc);
+            
             bool lost = true; /* I predict the player will always loose! mwahahah */
             
+            de::drawCurrentWord(game.sc);
+            de::drawGuessedChars(game.sc);
+            
             while (true){
-                std::cout << "Guess a char ";
-                const char guess = std::tolower(std::cin.get());
-                std::cin.get();
-                de::guessChar(game.gc, guess);
+                de::drawInput(game.sc);
                 
-                
-                std::cout << game.gc.wordChecker << std::endl; /* This should not appear here */
+                de::drawCurrentWord(game.sc);
+                de::drawGuessedChars(game.sc);
                 
                 if(de::isLettersGuessedRight(game.gc)){
                     lost = false;
@@ -37,15 +40,18 @@ namespace de{
                     break;
                 }
             }
+            /* Make the terminal buffer update */
+            std::cout << std::endl;
             
             if(lost){
-                std::cout << "Ooh!! How sad you lost :(" << std::endl;
+                alertMessage("Ooh!! How sad you lost :(", false);
             }else{
-                std::cout << "Congratz!! You won :)" << std::endl;
+                alertMessage("Congratz!! You won :)", true);
             }
+            std::cout << std::endl;
             
             std::string string;
-            std::cout << "Play again? (y/N) ";
+            alertMessage("Play again? (y/N) ", false);
             std::getline(std::cin, string);
             char option;
             if (string == ""){
