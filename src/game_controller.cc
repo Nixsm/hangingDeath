@@ -17,6 +17,8 @@ namespace de{
         gc.hanger = createHanger(10);
         gc.wordChecker = List<bool>();
         gc.currentWord = List<char>();
+        gc.charsGuessed = List<char>();
+
     }
     
     void newWord(GameController& gc){
@@ -86,10 +88,6 @@ namespace de{
     
     unsigned int getCurrentLife(const GameController& gc){
         return getHangedLife(gc.hanger);
-    }
-    
-    void drawHanged(const GameController& gc){
-        de::draw(gc.hanger);
     }
     
 }

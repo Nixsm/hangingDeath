@@ -8,12 +8,6 @@ namespace de{
         return hanger;
     }
     
-    void draw(const Hanger& hanger){
-//         for(auto i = 0; i < hanger.hangedLife; ++i){
-//             std::cout << hanger.hangedLife - 1 - i << std::endl;
-//         }
-    }
-    
     void setLife(Hanger& hanger, const unsigned int& hangedLife){
         hanger.hangedLife = hangedLife;
     }

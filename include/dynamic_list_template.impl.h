@@ -144,7 +144,7 @@ namespace de {
         unsigned int listSize = _size;
         const unsigned int listSize2 = listSize/2;
                 
-        for(auto i = 1; i <= listSize2; ++i){
+        for(auto i = 1u; i <= listSize2; ++i){
             const T temp = at(i);
             remove(i);
             

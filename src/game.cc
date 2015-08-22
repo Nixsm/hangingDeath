@@ -14,11 +14,17 @@ namespace de{
     void start(Game& game){
         bool shouldQuit = false;
         
-        drawBorders('_', '.');
-        
         
         while (!shouldQuit){
+#ifdef _WIN32
+            system("cls");
+#else
+            system("clear");
+#endif
+            drawBorders('_', '.');
             
+            de::reset(game.gc);
+
             /* choose a random new word */
             de::newWord(game.gc);
             
@@ -26,10 +32,12 @@ namespace de{
             
             de::drawCurrentWord(game.sc);
             de::drawGuessedChars(game.sc);
+            de::drawHanger(game.sc);
             
             while (true){
                 de::drawInput(game.sc);
-                
+
+                de::drawHanger(game.sc);
                 de::drawCurrentWord(game.sc);
                 de::drawGuessedChars(game.sc);
                 
@@ -44,7 +52,7 @@ namespace de{
             std::cout << std::endl;
             
             if(lost){
-                alertMessage("Ooh!! How sad you lost :(", false);
+                alertMessage("Ooh!! How sad you lost :(", true);
             }else{
                 alertMessage("Congratz!! You won :)", true);
             }

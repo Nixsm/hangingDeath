@@ -20,6 +20,15 @@ namespace de{
         clearLine(MAX_COL+1);
     }
     
+    void clearHanged() {
+        for (auto i = 16; i <= 18; ++i){
+            for (auto j = 7; j <= 12; ++j){
+                gotoxy(i, j); std::cout << " " << std::endl;
+            }
+        }
+    }
+
+    
     void alertMessage(const char* message, const bool& sleep){
         clearAlertMessage();
         printAt(message, 0, MAX_COL+1);
@@ -33,8 +42,71 @@ namespace de{
     
     void drawHanger(const Screen& sc){
         const unsigned int life = de::getCurrentLife(*sc.gc);
-
-        std::cout << "Current Life: " << life << std::endl;
+        
+        clearHanged();
+        
+        /* draw the hanger */
+        for (auto i = 5; i <= 17; ++i){
+            gotoxy(i, 4); std::cout << "_" << std::endl;
+        }
+        
+        for(auto i = 5; i <= 6; ++i) {
+            gotoxy(17, i); std::cout << "|" << std::endl;
+        }
+        
+        for (auto i = 5; i <= 15; ++i) {
+            gotoxy(5, i); std::cout << "|" << std::endl;
+        }
+        gotoxy(4, 15); std::cout << "/" << std::endl;
+        gotoxy(6, 15); std::cout << "\\" << std::endl;
+        
+        /* Hanged person starts here */
+        /* start drawing at 17, 7 */
+        
+        /* draw head */
+        
+        if (life > 0){
+            gotoxy(16, 7); std::cout << "(" << std::endl;
+        }
+        if (life > 1){
+            gotoxy(18, 7); std::cout << ")" << std::endl;
+        }
+        
+        /* draw heart */
+        if (life > 2){
+            gotoxy(17, 8); std::cout << "*" << std::endl;
+        }
+        /* draw arms */
+        if (life > 3) {
+            gotoxy(16, 8); std::cout << "/" << std::endl;
+        }
+        
+        if (life > 4){
+            gotoxy(18, 8); std::cout << "\\" << std::endl;
+        }
+        
+        /* draw body */
+        if (life > 5) {
+            gotoxy(17, 9); std::cout << "|" << std::endl;
+        }
+        
+        if (life > 6) {
+            gotoxy(17, 10); std::cout << "|" << std::endl;
+        }
+        
+        if (life > 7) {
+            gotoxy(17, 11); std::cout << "|" << std::endl;
+        }
+        
+      
+        /* draw legs */
+        if (life > 8) {
+            gotoxy(16, 12); std::cout << "/" << std::endl;
+        }
+        
+        if (life > 9){
+            gotoxy(18, 12); std::cout << "\\" << std::endl;
+        }
     }
 
     void drawInput(Screen& sc){
@@ -55,7 +127,7 @@ namespace de{
         List<bool> wordChecker = getCheckedChars(*sc.gc);
         List<char> drawed;
         
-        for (auto i = 1; i <= currentWord.size(); ++i){
+        for (auto i = 1u; i <= currentWord.size(); ++i){
             if (wordChecker[i]){
                 drawed.insert(currentWord[i], i);
             }else{

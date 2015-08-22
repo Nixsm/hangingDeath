@@ -29,9 +29,7 @@ namespace de{
     List<char> getCharsGuessed(const GameController& gc);
     List<char> getCurrentWord(const GameController& gc);
     unsigned int getCurrentLife(const GameController& gc);
-    
-    void drawHanged(const GameController& gc);
-    
+        
     bool isLettersGuessedRight(const GameController& gc);
     
     

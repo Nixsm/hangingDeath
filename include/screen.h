@@ -14,6 +14,8 @@ namespace de{
     
     void clearAlertMessage();
     
+    void clearHanged();
+    
     void alertMessage(const char* message, const bool& sleep);
     
     void drawInput(Screen& sc);
