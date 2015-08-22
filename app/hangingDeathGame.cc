@@ -26,5 +26,9 @@ int main(int argc, char** argv){
 }
 
 void help(){
-    std::cout << "<exec> <path/to/words/file>" << std::endl;
+    std::cout << "<exec> <path/to/words/file>" << std::endl
+              << "Please run on a terminal" << std::endl
+              << "If using Mac OS x, type CMD + Space to open spotlight and type terminal" << std::endl
+              << "If on Linux, you'd probably be running it already on a terminal" << std::endl;
+    
 }
